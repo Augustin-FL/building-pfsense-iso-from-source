@@ -53,9 +53,9 @@ Netgate seems to be using a quite heavy and complex build environment, designed 
 ![netgate environment for build](
 https://github.com/Augustin-FL/building-pfsense-iso-from-source/blob/master/images/netgate_env.png?raw=true)
 
-Because this tutorial doesn't aim to set up an industrialized build farm:  
-- PKG repositories signing scripts will be located on the build server
+Because this tutorial doesn't aim to set up an industrialized build farm:
 - The build server will also act as web server for delivering PKG repositories (The build system is actively using PKG repositories when making an ISO).
+- PKG signing scripts will be located on the build server
 - Files won't be sent to an external NFS server after being built
 
 
