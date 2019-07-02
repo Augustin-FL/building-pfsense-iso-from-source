@@ -1,6 +1,6 @@
 # How to: building a pfSense .iso from sources
 
-Here are the steps for building a pfSense ISO file. I tried to follow [the guide of PiBa-NL](https://github.com/PiBa-NL/PiBa-NL-WIKI/wiki/How-to-building-a-pfSense-.iso-from-sources) firstly, but there was missing things so I made my own guide. This guide has been written for 2.5.0, but may works for other versions
+Here are the steps for building a pfSense ISO file. I tried to follow [the guide of PiBa-NL](https://github.com/PiBa-NL/PiBa-NL-WIKI/wiki/How-to-building-a-pfSense-.iso-from-sources) firstly, but there was missing things so I made my own guide. This guide has been written for 2.5.0 (which does not exist yet), but may works for other versions
 
 *Like for PiBa-NL guide, small disclaimer: Stuff might be missing, and stuff will change over time, and might not be updated.*
 
