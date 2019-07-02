@@ -168,7 +168,7 @@ Now that your server is configured, we will configure how pfSense will be compil
 cd /root
 git clone https://github.com/{your username}/pfsense.git
 cd pfsense
-git checkout RELENG_2_5_0
+git checkout RELENG_2_5_0 # Branch of pfSense GUI to build. 
 
 # PKG signing key
 mkdir -p src/usr/local/share/${product_name}/keys/pkg/trusted/
