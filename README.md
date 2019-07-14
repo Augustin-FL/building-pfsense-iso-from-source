@@ -37,7 +37,7 @@ When Netgate decide to refresh sources from upstream in their ISO, they merge Fr
 ### pfSense GUI
 - Fork https://github.com/pfsense/pfsense . 
 - Go to the folder `/tools/templates/pkg_repos/` in the branch you would like to build (`master`for dev version, `RELENG_2_5_0` for stable version)
-- Change `pfSense` to `libreSense` in the files names (eg, `pfSense-repo.abi => libreSense-repo.abi`)
+- Change `pfSense` to `libreSense` in the file names (e.g., `pfSense-repo.abi => libreSense-repo.abi`)
 
 The dev/snapshot branch of pfSense is `master`. `RELENG_2_5_*` are branches used for building stable pfSense iso. 
 
@@ -236,7 +236,7 @@ In case something goes wrong: Logs files can be seen using HTTP or directly on t
 Few possible root causes: 
 - The `FreeBSD-port` branch that you are trying to build does not match the FreeBSD version of your build server.
 - You are trying to build an out-of-date version of pfSense and some `dist` files are not available anymore on the [official FreeBSD distcache](http://distcache.FreeBSD.org/), resulting in errors at the `fetch` step. 
-   - In this case you can update the [`distinfo`](https://github.com/pfsense/FreeBSD-ports/blob/devel/print/texinfo/distinfo) of each concerned port in your github fork of `FreeBSD ports`, then you can run `./build.sh --update-poudriere-ports` to refresh the files on your build server. 
+   - In this case you can update the [`distinfo`](https://github.com/pfsense/FreeBSD-ports/blob/devel/print/texinfo/distinfo) of each concerned port in your GitHub fork of `FreeBSD ports`, then you can run `./build.sh --update-poudriere-ports` to refresh the files on your build server. 
    - Alternatively, you can find any old dist mirror (such as [this one](http://distfiles.icmpv6.org/distfiles/)), download the files on the build server in their matching folder (using `wget`/`curl`), then continue the build
 
 You need to build **ALL** ports before proceeding to the next step. If you don't want to build one port, you can exclude it by removing it in `~/pfsense/tools/conf/pfPorts/poudriere_bulk`. 
@@ -255,11 +255,11 @@ At the end of the build, a compressed iso file (`.iso.gz`) file will be present 
 
 ### If your encounter errors during ports or kernel build: possible root causes, and how to fix them:
 
-One very possible root cause to why your build is failing, is related to how `Makefile` system works correlated with an unlucly timing. What happens is usually close to the following: 
+One very possible root cause to why your build is failing, is related to how `Makefile` system works correlated with an unlucky timing. What happens is usually close to the following: 
 
 1. Netgate build port XXX from `FreeBSD-ports`. Poudriere marks the port as built and won't attempt to re-build it unless an update is made on the code ("config bump")
 2. Netgate does NOT refresh pfSense branches on `FreeBSD-ports`
-3. Few month later, ports owners update their build requirement (`distfile` update) / Netgate update its build environment (eg, `openssl => opensll111` ), but the built packages are not re-built because no config bump is made on the ports. At this point, any attempt of rebuilding ports without updating `FreeBSD-ports` will fail.
+3. Few month later, ports owners update their build requirement (`distfile` update) / Netgate update its build environment (e.g., `openssl => opensll111` ), but the built packages are not re-built because no config bump is made on the ports. At this point, any attempt of rebuilding ports without updating `FreeBSD-ports` will fail.
 4. When you try to build ports yourself, some ports fail during build and you don't understand why.
 
 The same applies for the content of `FreeBSD-src`. The recommended way to fix this issue is to simply re-synchronize modules that are failing with upstream, so that you will have an up-to-date ISO.
@@ -278,6 +278,6 @@ The generated unique ID then become part of the default "User-Agent" when making
 
 It is also required for accessing Netgate services on pfSense (such as ACB, or professional support)
 
-How does this binary works is known *(a quick look to this binary with `radare2` show that it basically tries to fetch the platform it is running on, and if the platform is not Netgate hardware then it computes an ID using sha256 and MAC addresses of the device)*, but this program is property of Netgate and is closed-source (it is stored in the internal gitlab of Netgate). 
+How does this binary works is known *(a quick look to this binary with `radare2` show that it basically tries to fetch the platform it is running on, and if the platform is not Netgate hardware then it computes an ID using sha256 and MAC addresses of the device)*, but this program is property of Netgate and is closed-source (it is stored in the internal GitLab of Netgate). 
 
 Because your ISO does not contain GNID, you may not be able to retrieve bogons feed from Netgate, to use ACB, to use official pfSense PKG repositories or to ask for professional support to Netgate.
