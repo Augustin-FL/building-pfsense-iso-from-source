@@ -19,30 +19,15 @@ You will then have to fork and commit update to 3 repositories:
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 - Edit the file `/tools/tools/crypto/Makefile` : remove `cryptokeytest` from the `PROGS` command
 
-A little word  on "how are branches organized in this repository": `stable/*` and `devel/*` are synchronized with the original FreeBSD sources. `RELENG_*` are branches used for building pfSense and are containing commits made by Netgate.
-
-When Netgate decide to refresh sources from upstream in their ISO, they simply merge FreeBSD branches to `RELENG_*` branches.
-
-It is worth noting that Netgate tries to stick as close as possible to the original FreeBSD kernel, therefore most of their updates are made directly in the original FreeBSD sources. There is almost no commit made on `RELENG_*` that do not come from `stable/*` / `devel/*`.
-
 ### FreeBSD Ports
 - Fork https://github.com/pfsense/FreeBSD-ports and checkout to the `devel` branch (for building dev version) or to  `RELENG_2_5_0` branch (for the stable version)
 - In the folder `/sysutils/pfSense-upgrade/files/`, rename the two files `pfSense-upgrade` and `pfsense-upgrade.wrapper` to `libreSense-upgrade` and `libreSense-upgrade.wrapper`
 - Also rename the folder `/sysutils/pfSense-upgrade/` to `/sysutils/libreSense-upgrade/`
 
-A little word  on "how are branches organized in this repository": `branches/*` are synchronized with the original FreeBSD ports. `devel` branch is the development branch of pfSense. `RELENG_2_5_*` are branches used for building stable pfSense iso.
-
-When Netgate decide to refresh sources from upstream in their ISO, they merge FreeBSD branches to the `devel` branch. When an update of a port is needed both on stable and dev version, the commit is made to `devel` branch then cherry-picked to `RELENG_2_5_*` branches.
-
 ### pfSense GUI
 - Fork https://github.com/pfsense/pfsense . 
 - Go to the folder `/tools/templates/pkg_repos/` in the branch you would like to build (`master`for dev version, `RELENG_2_5_0` for stable version)
 - Change `pfSense` to `libreSense` in the file names (e.g., `pfSense-repo.abi => libreSense-repo.abi`)
-
-The dev/snapshot branch of pfSense is `master`. `RELENG_2_5_*` are branches used for building stable pfSense iso. 
-
-When an update is needed both on stable and dev version, the commit is made to the `master` branch then cherry-picked to `RELENG_2_5_*` branches.
-
 
 ## A deeper look into Netgate build environment
 
