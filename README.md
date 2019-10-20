@@ -11,7 +11,7 @@ Before building a .iso file, you will have to choose a custom name for your fire
 I'll use libreSense for this tutorial, but you could use whatever you want.
 
 
-You will then have to fork and commit update to 3 repositories: 
+You will then have to fork and apply updates to 3 repositories: 
 
 ### FreeBSD Source
 - Fork https://github.com/pfsense/FreeBSD-src and checkout to the `RELENG_2_5` branch. 
