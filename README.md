@@ -265,4 +265,5 @@ It is also required for accessing Netgate services on pfSense (such as ACB, or p
 
 How does this binary works is known *(a quick look to this binary with `radare2` show that it basically tries to fetch the platform it is running on, and if the platform is not Netgate hardware then it computes an ID using sha256 and MAC addresses of the device)*, but this program is property of Netgate and is closed-source (it is stored in the internal GitLab of Netgate). 
 
-Because your ISO does not contain GNID, you may not be able to retrieve bogons feed from Netgate, to use ACB, to use official pfSense PKG repositories or to ask for professional support to Netgate.
+Because your ISO does not contain GNID, you may not be able to retrieve bogons feed from Netgate, to use ACB, to install packages from official repositories or to ask for professional support to Netgate.
+You also won't recieve latest pfSense updates (which makes sense, since your product is not called "pfSense"..)
