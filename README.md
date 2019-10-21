@@ -191,7 +191,7 @@ export PKG_REPO_SERVER_DEVEL="pkg+http://${myIPAddress}/packages"
 export PKG_REPO_SERVER_RELEASE="pkg+http://${myIPAddress}/packages"
 
 export PKG_REPO_SERVER_STAGING="pkg+http://${myIPAddress}/packages" # We need to also specify this variable, because even
-# if we don't build staging release some ports configuration is made on staging.
+# if we don't build staging release some ports configuration is made for staging.
 ``` 
 
 # Building the ISO
