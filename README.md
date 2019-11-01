@@ -223,7 +223,7 @@ Few possible root causes:
    - In this case you can update the [`distinfo`](https://github.com/pfsense/FreeBSD-ports/blob/devel/print/texinfo/distinfo) of each concerned port in your GitHub fork of `FreeBSD ports`, then you can run `./build.sh --update-poudriere-ports` to refresh the files on your build server. 
    - Alternatively, you can find any old dist mirror (such as [this one](http://distfiles.icmpv6.org/distfiles/)), download the files on the build server in their matching folder (using `wget`/`curl`), then continue the build
 
-You need to build **ALL** ports before proceeding to the next step. If you don't want to build one port, you can exclude it by removing it in `~/pfsense/tools/conf/pfPorts/poudriere_bulk`. 
+You need to build **ALL** ports before proceeding to the next step. If you don't want to build one port, you can exclude it by removing it in [tools/conf/pfPorts/poudriere_bulk](https://github.com/pfsense/pfsense/blob/master/tools/conf/pfPorts/poudriere_bulk). 
 
 
 ### Build kernel and create ISO
