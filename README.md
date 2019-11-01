@@ -156,10 +156,9 @@ cd pfsense
 git checkout RELENG_2_5_0 # Branch of pfSense GUI to build. 
 
 # PKG signing key
-mkdir -p src/usr/local/share/${product_name}/keys/pkg/trusted/
-mkdir -p src/usr/local/share/${product_name}/keys/pkg/revoked/
-cp /root/sign/fingerprint src/usr/local/share/${product_name}/keys/pkg/trusted/fingerprint 
-touch src/usr/local/share/${product_name}/keys/pkg/revoked/.empty
+mv src/usr/local/share/pfSense src/usr/local/share/${product_name}
+rm src/usr/local/share/${product_name}/keys/pkg/trusted/*
+cp /root/sign/fingerprint src/usr/local/share/${product_name}/keys/pkg/trusted/fingerprint
 ```
 
 
@@ -229,7 +228,7 @@ You need to build **ALL** ports before proceeding to the next step. If you don't
 
 ### Build kernel and create ISO
 
- Finally, you can build your customized firewall: `./build.sh --skip-final-rsync iso`. This command will build the kernel, then install ports on top of it and create the ISO file.
+ Finally, you can build your customized firewall: `./build.sh --skip-final-rsync iso`. This command will build the kernel, then install ports on top of it and create the ISO file. Expect the command to run for ~one hour.
  
 The build can the monitored from the two files in the `logs/` directory of pfSense GUI: 
 - `buildworld.amd64`, `installworld.amd64` and `kernel.libreSense.amd64.log` will contain logs relative to the build of FreeBSD kernel.
