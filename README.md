@@ -153,7 +153,7 @@ Now that your server is configured, we will configure how pfSense will be compil
 cd /root
 git clone https://github.com/{your username}/pfsense.git
 cd pfsense
-git checkout RELENG_2_5_0 # Branch of pfSense GUI to build. 
+git checkout ${pfSense_gui_branch}
 
 # PKG signing key
 mv src/usr/local/share/pfSense src/usr/local/share/${product_name}
@@ -164,7 +164,7 @@ cp /root/sign/fingerprint src/usr/local/share/${product_name}/keys/pkg/trusted/f
 
 Let's then create a file called ```build.conf``` in the folder of pfSense GUI.
 ```
-export PRODUCT_NAME="libreSense"
+export PRODUCT_NAME="libreSense" # Replace with your product name
 export FREEBSD_REPO_BASE=https://github.com/{your username}/FreeBSD-src.git # Location of your FreeBSD sources repository
 export POUDRIERE_PORTS_GIT_URL=https://github.com/{your username}/FreeBSD-ports.git # Location your FreeBSD ports repository
 
