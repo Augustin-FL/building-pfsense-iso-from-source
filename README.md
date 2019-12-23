@@ -21,8 +21,7 @@ You will then have to fork and apply updates to 3 repositories:
 
 ### FreeBSD Ports
 - Fork https://github.com/pfsense/FreeBSD-ports and checkout to the `devel` branch (for building dev version) or to  `RELENG_2_5_0` branch (for the stable version)
-- In the folder `/sysutils/pfSense-upgrade/files/`, rename the two files `pfSense-upgrade` and `pfsense-upgrade.wrapper` to `libreSense-upgrade` and `libreSense-upgrade.wrapper`
-- Also rename the folder `/sysutils/pfSense-upgrade/` to `/sysutils/libreSense-upgrade/`
+- In the folder `/sysutils/pfSense-upgrade/files/`, rename the two files `pfSense-upgrade` and `pfsense-upgrade.wrapper` to `libreSense-upgrade` and `libreSense-upgrade.wrapper`.
 
 ### pfSense GUI
 - Fork https://github.com/pfsense/pfsense . 
