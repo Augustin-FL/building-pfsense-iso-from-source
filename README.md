@@ -169,8 +169,12 @@ export FREEBSD_REPO_BASE=https://github.com/{your username}/FreeBSD-src.git # L
 export POUDRIERE_PORTS_GIT_URL=https://github.com/{your username}/FreeBSD-ports.git # Location your FreeBSD ports repository
 
 export FREEBSD_BRANCH=RELENG_2_5 # Branch of FreeBSD sources to build
+
 # The branch of FreeBSD ports to build is set automatically based on pfSense GUI branch.
 # If you would like to build a specific branch of FreeBSD ports, the variable to set is POUDRIERE_PORTS_GIT_BRANCH
+# Also, if you are building a FreeBSD port branch that does not respect Netgate conventions (devel or RELENG_*),
+# You will also have to update .conf files in "tools/templates/pkg_repos/" because repositories names are partially 
+# hardcoded there.
 
 
 
