@@ -28,6 +28,7 @@ You will then have to fork and apply updates to 3 repositories:
 - Go to the folder `/tools/templates/pkg_repos/` in the branch you would like to build (`master`for dev version, `RELENG_2_5_0` for stable version)
 - Change `pfSense` to `libreSense` in the file names (e.g., `pfSense-repo.abi => libreSense-repo.abi`)
 - Edit the file `/src/etc/inc/globals.inc` : replace the content of `product_name` by your ISO name.
+- In the folder `/src/usr/local/share/`, rename `pfSense` to your ISO name
 
 ## A deeper look into Netgate build environment
 
@@ -156,7 +157,6 @@ cd pfsense
 git checkout ${pfSense_gui_branch}
 
 # PKG signing key
-mv src/usr/local/share/pfSense src/usr/local/share/${product_name}
 rm src/usr/local/share/${product_name}/keys/pkg/trusted/*
 cp /root/sign/fingerprint src/usr/local/share/${product_name}/keys/pkg/trusted/fingerprint
 ```
