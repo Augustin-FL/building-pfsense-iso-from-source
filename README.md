@@ -6,7 +6,7 @@ Here are the steps for building a pfSense ISO file. I tried to follow [the guide
 
 # First things first: choose a name for your product, and update repositories accordingly
 
-Netgate doesn't allow you to build a product using the name "pfSense" (because of copyright/trademark). 
+Netgate doesn't allow you to build a product using the name "pfSense" (because of trademark). 
 Before building a .iso file, you will have to choose a custom name for your firewall.
 I'll use libreSense for this tutorial, but you could use whatever you want.
 
