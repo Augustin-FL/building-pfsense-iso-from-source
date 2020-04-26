@@ -11,22 +11,21 @@ Before building a .iso file, you will have to choose a custom name for your fire
 I'll use libreSense for this tutorial, but you could use whatever you want.
 
 
-You will then have to fork and apply updates to 3 repositories: 
+You will then have to fork 3 repositories: 
+- [pfSense GUI](https://github.com/pfsense/pfsense)
+- [FreeBSD Ports](https://github.com/pfsense/freebsd-ports) (Ports collection is the FreeBSD package management system)
+- [FreeBSD Kernel Source](https://github.com/pfsense/freebsd-src) 
+
+You will also need to apply the follwing changes :
 
 ### FreeBSD Source
-- Fork https://github.com/pfsense/FreeBSD-src and checkout to the `RELENG_2_5` branch. 
+- Checkout to the `RELENG_2_5` branch. 
 - In the folder `/release/conf/`, rename `pfSense_src-env.conf`, `pfSense_src.conf` and `pfSense_make.conf` to `libreSense_src-env.conf`, `libreSense_src.conf` and `libreSense_make.conf`
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 - Edit the file `/tools/tools/crypto/Makefile` : remove `cryptokeytest` from the `PROGS` command
 
-### FreeBSD Ports
-- Fork https://github.com/pfsense/FreeBSD-ports and checkout to the `devel` branch (for building dev version) or to  `RELENG_2_5_0` branch (for the stable version)
-- In the folder `/sysutils/pfSense-upgrade/files/`, rename the two files `pfSense-upgrade` and `pfsense-upgrade.wrapper` to `libreSense-upgrade` and `libreSense-upgrade.wrapper`.
-
 ### pfSense GUI
-- Fork https://github.com/pfsense/pfsense . 
-- Go to the folder `/tools/templates/pkg_repos/` in the branch you would like to build (`master`for dev version, `RELENG_2_5_0` for stable version)
-- Change `pfSense` to `libreSense` in the file names (e.g., `pfSense-repo.abi => libreSense-repo.abi`)
+- Go to the folder `/tools/templates/pkg_repos/` in the branch you would like to build (`master`for dev version, `RELENG_2_5_0` for stable version) and change `pfSense` to `libreSense` in the file names (e.g., `pfSense-repo.abi => libreSense-repo.abi`)
 - Edit the file `/src/etc/inc/globals.inc` : replace the content of `product_name` by `libreSense`.
 - Edit the file `/tools/conf/pfPorts/make.conf` : replace `pfSense` by `libreSense` in the `PFSENSE_REPOS` variable.
 - In the folder `/src/usr/local/share/`, rename the folder `pfSense` to `libreSense`.
