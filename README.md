@@ -73,10 +73,10 @@ service sshd restart
 pkg install -y pkg vim nano
 
 # Required for installing and building ports
-pkg install -y git nginx poudriere-devel mkfile rsync sudo
+pkg install -y git nginx poudriere-devel rsync sudo
 
 # Required for building kernel and iso
-pkg install -y vmdktool curl qemu-user-static gtar xmlstarlet pkgconf openssl111
+pkg install -y vmdktool curl qemu-user-static gtar xmlstarlet pkgconf openssl
 
 # Required for building iso
 portsnap fetch extract
