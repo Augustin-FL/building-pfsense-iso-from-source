@@ -13,8 +13,8 @@ I'll use libreSense for this tutorial, but you could use whatever you want.
 
 You will then have to fork 3 repositories: 
 - [pfSense GUI](https://github.com/pfsense/pfsense)
-- [FreeBSD Ports](https://github.com/pfsense/freebsd-ports) (Ports collection is the FreeBSD package management system)
-- [FreeBSD Kernel Source](https://github.com/pfsense/freebsd-src) 
+- [FreeBSD Ports](https://github.com/pfsense/freebsd-ports) (Ports collection is the FreeBSD package management system, it works like `apt` or `rpm` on Linux)
+- [FreeBSD Kernel Source](https://github.com/pfsense/freebsd-src)
 
 You will also need to apply the follwing changes :
 
@@ -40,8 +40,8 @@ Netgate seems to be using a quite heavy and complex build environment, designed 
 https://github.com/Augustin-FL/building-pfsense-iso-from-source/blob/master/images/netgate_env.png?raw=true)
 
 Because this tutorial doesn't aim to set up an industrialized build farm:
-- The build server will also act as web server for delivering PKG repositories (The build system is actively using PKG repositories when making an ISO).
-- PKG signing scripts will be located on the build server
+- The build server will also act as web server for delivering ports (The build system is actively using ports repository when making an ISO).
+- Signing scripts for the ports repository will be located on the build server
 - Files won't be sent to an external NFS server after being built
 
 
@@ -49,9 +49,9 @@ With that said, let's setup our build server.
 
 # Setup a proper build environment
 
-- You will need to download and install a FreeBSD server that matches the version you want to build. pfSense 2.5.0 [require FreeBSD 12](https://docs.netgate.com/pfsense/en/latest/releases/versions-of-pfsense-and-freebsd.html), in AMD64.
+- You will need to download and install a FreeBSD server that matches the version you want to build. pfSense 2.5.0 [require FreeBSD 12.0](https://docs.netgate.com/pfsense/en/latest/releases/versions-of-pfsense-and-freebsd.html), in AMD64.
 
-This server can be either a VM or a physical machine. High amount of HDD isn't needed (at least 30 Gb is recommended) but high number of CPU core is advised (otherwise build time may be very long) and high memory amount is required (>10Gb recommended. 8 Gb should be fine....6 Gb is not enough and may cause your build to crash). [You can download a FreeBSD ISO here](https://download.freebsd.org/ftp/releases/amd64/amd64/ISO-IMAGES/)
+This server can be either a VM or a physical machine. High amount of HDD isn't needed (at least 30 Gb is recommended) but high number of CPU core is advised (otherwise build time may be very long) and high memory amount is required (>10Gb recommended. 10 Gb should be fine....8 Gb is not enough and may cause your build to crash). [You can download a FreeBSD ISO here](https://download.freebsd.org/ftp/releases/amd64/amd64/ISO-IMAGES/).
 
 This FreeBSD machine will also have to be connected to the internet and will have to be reachable by your workstations in SSH and HTTP.
 
@@ -104,9 +104,9 @@ set product_name=libreSense # Replace with your product name
 cd /usr/local/www/nginx/
 rm -rf *
 mkdir -p packages
-# PKG web server for core PKG repositories (pfSense-base, pfSense-rc, etc...)
+# Ports web server for core PKGs (pfSense-base, pfSense-rc, etc...)
 ln -s /root/pfsense/tmp/${product_name}_${pfSense_gui_branch}_amd64-core/.latest packages/${product_name}_${pfSense_gui_branch}_amd64-core
-# PKG web server for other PKG repositories
+# Ports web server for other PKGs
 ln -s /usr/local/poudriere/data/packages/${product_name}_${pfSense_gui_branch}_amd64-${product_name}_${pfSense_port_branch} packages/${product_name}_${pfSense_gui_branch}_amd64-${product_name}_${pfSense_port_branch} 
 # Web server for monitoring ports build
 ln -s /usr/local/poudriere/data/logs/bulk/${product_name}_${pfSense_gui_branch}_amd64-${product_name}_${pfSense_port_branch}/latest poudriere
@@ -156,7 +156,7 @@ git clone https://github.com/{your username}/pfsense.git
 cd pfsense
 git checkout RELENG_2_5_0 # Replace by the branch of pfSense GUI to build.
 
-# PKG signing key
+# Ports repositories signing key
 rm src/usr/local/share/${product_name}/keys/pkg/trusted/*
 cp /root/sign/fingerprint src/usr/local/share/${product_name}/keys/pkg/trusted/fingerprint
 ```
@@ -204,7 +204,7 @@ Now that we have a working environment, let's start the heavy work.
 First, start a screen on your build server, using command ```screen -S build```. You may leave this screen using ctrl+A then D, and you may enter this screen again using command ```screen -r build```. The purpose of the screen is to keep your work running if you disconnect from the build server.
 
 ### Setup Jails
-Execute the command ```./build.sh --setup-poudriere```. This will setup the environment and create the FreeBSD jail necessary for your build. You can then leave the screen and `tail -f logs/poudriere.log` to check what's going on. Expect the command to run for ~half hour.
+Execute the command ```./build.sh --setup-poudriere```. This will setup the environment and create the FreeBSD jail necessary for your build. You can then leave the screen and `tail -f logs/poudriere.log` to check what's going on. Expect the command to run for ~1 hour.
 
 If something goes wrong: 
 - You may add `set -x` at the beginning of `build.sh` to debug what's happening in there.
@@ -214,7 +214,7 @@ If something goes wrong:
 
 ### Build ports
 Then execute ```./build.sh --update-pkg-repo``` to compile the ~500 FreeBSD ports of pfSense.
-You may want to monitor the build environment on your server using HTTP ( http://ipOfYourServer/poudriere ). Expect between 2 to 4 hours to run.
+You may want to monitor the build environment on your server using HTTP ( http://ipOfYourServer/poudriere ). Expect between 4 to 6 hours to run.
 
 ![Disk partition](
 https://github.com/Augustin-FL/building-pfsense-iso-from-source/blob/master/images/poudriere_build.png?raw=true)
