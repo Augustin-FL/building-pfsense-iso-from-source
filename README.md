@@ -29,7 +29,7 @@ You will also need to apply the follwing changes :
 - Edit the file `/src/etc/inc/globals.inc` : replace the content of `product_name` by `libreSense`.
 - Edit the file `/tools/conf/pfPorts/make.conf` : replace `pfSense` by `libreSense` in the `PFSENSE_REPOS` variable.
 - In the folder `/src/usr/local/share/`, rename the folder `pfSense` to `libreSense`.
-- In the folder `/src/etc`, rename the files `pfSense-ddb.conf` and `pfSense-devd.conf` to `libreSense-ddb.conf` and `libreSense-devd.conf`
+- In the folder `/src/etc/`, rename the files `pfSense-ddb.conf` and `pfSense-devd.conf` to `libreSense-ddb.conf` and `libreSense-devd.conf`
 
 ## A deeper look into Netgate build environment
 
