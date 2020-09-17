@@ -50,7 +50,7 @@ With that said, let's setup our build server.
 
 # Setup a proper build environment
 
-- You will need to download and install a FreeBSD server that matches the version you want to build. pfSense 2.5.0 [require FreeBSD 12.0](https://docs.netgate.com/pfsense/en/latest/releases/versions-of-pfsense-and-freebsd.html), in AMD64.
+- You will need to download and install a FreeBSD server that matches the version you want to build. pfSense 2.5.0 [require FreeBSD 12.2](https://docs.netgate.com/pfsense/en/latest/releases/versions-of-pfsense-and-freebsd.html), in AMD64.
 
 This server can be either a VM or a physical machine. High amount of HDD isn't needed (at least 30 Gb is recommended) but high number of CPU core is advised (otherwise build time may be very long) and high memory amount is required (>10Gb recommended. 10 Gb should be fine....8 Gb is not enough and may cause your build to crash). [You can download a FreeBSD ISO here](https://download.freebsd.org/ftp/releases/amd64/amd64/ISO-IMAGES/).
 
