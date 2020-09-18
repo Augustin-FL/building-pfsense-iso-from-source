@@ -248,7 +248,7 @@ One very possible root cause to why your build is failing, is related to how `Ma
 
 1. Netgate build port XXX from `FreeBSD-ports`. On internal Netgate servers, poudriere marks the port as built and won't attempt to re-build it unless an update is made on the code ("config bump")
 3. Few month later, ports owners update their build requirement (`distfile` update) / Netgate update its build environment (e.g., `openssl => opensll111` )
-2. Netgate does NOT keep `FreeBSD-ports` in sync with the official FreeBSD ports repository. At this point, any attempt of rebuilding ports will fail...But it is fine for Netgate : the built packages are already there, and no rebuild will be made as long are no config bump is done on the ports. 
+2. Netgate does NOT keep `FreeBSD-ports` in sync with the official FreeBSD ports repository. At this point, any attempt of rebuilding ports will fail...But it is fine for Netgate : the built packages are already there, and no rebuild will be made as long as no config bump is done on the ports. 
 4. When you try to build ports yourself, some ports fail during build and you don't understand why.
 
 The same applies for the content of `FreeBSD-src`. The recommended way to fix this issue is to simply re-synchronize modules that are failing with upstream, so that you will have an up-to-date ISO.
