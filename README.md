@@ -70,7 +70,7 @@ echo PermitRootLogin yes >> /etc/ssh/sshd_config
 service sshd restart
 
 # Required for configuring the server
-pkg install -y pkg vim nano emacs mmv
+pkg install -y pkg vim nano emacs
 
 # Required for installing and building ports
 pkg install -y git nginx poudriere-devel rsync sudo
@@ -82,7 +82,7 @@ pkg install -y vmdktool curl qemu-user-static gtar xmlstarlet pkgconf openssl
 portsnap fetch extract
 
 # not required but advised for building/monitoring/debugging
-pkg install -y htop screen wget
+pkg install -y htop screen wget mmv
 
 # Only install this if your FreeBSD is a virtual machine
 pkg install -y open-vm-tools
