@@ -70,7 +70,7 @@ echo PermitRootLogin yes >> /etc/ssh/sshd_config
 service sshd restart
 
 # Required for configuring the server
-pkg install -y pkg vim nano
+pkg install -y pkg vim nano emacs mmv
 
 # Required for installing and building ports
 pkg install -y git nginx poudriere-devel rsync sudo
