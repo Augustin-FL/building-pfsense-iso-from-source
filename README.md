@@ -22,7 +22,6 @@ You will also need to apply the follwing changes :
 - Checkout to the `RELENG_2_5` branch. 
 - In the folder `/release/conf/`, rename `pfSense_src-env.conf`, `pfSense_src.conf` and `pfSense_make.conf` to `libreSense_src-env.conf`, `libreSense_src.conf` and `libreSense_make.conf`
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
-- Edit the file `/tools/tools/crypto/Makefile` : remove `cryptokeytest` from the `PROGS` command
 
 ### pfSense GUI
 - Go to the folder `/tools/templates/pkg_repos/` in the branch you would like to build (`master`for dev version, `RELENG_2_5_0` for stable version) and change `pfSense` to `libreSense` in the file names (e.g., `pfSense-repo.abi => libreSense-repo.abi`)
@@ -168,7 +167,7 @@ export PRODUCT_NAME="libreSense" # Replace with your product name
 export FREEBSD_REPO_BASE=https://github.com/{your username}/FreeBSD-src.git # Location of your FreeBSD sources repository
 export POUDRIERE_PORTS_GIT_URL=https://github.com/{your username}/FreeBSD-ports.git # Location your FreeBSD ports repository
 
-export FREEBSD_BRANCH=RELENG_2_5 # Branch of FreeBSD sources to build
+export FREEBSD_BRANCH=devel-12 # Branch of FreeBSD sources to build
 
 # The branch of FreeBSD ports to build is set automatically based on pfSense GUI branch.
 # If you would like to build a specific branch of FreeBSD ports, the variable to set is POUDRIERE_PORTS_GIT_BRANCH
@@ -238,6 +237,8 @@ The build can the monitored from the two files in the `logs/` directory of pfSen
 - `buildworld.amd64`, `installworld.amd64` and `kernel.libreSense.amd64.log` will contain logs relative to the build of FreeBSD kernel.
 - `install_pkg_install_ports.txt` contain logs relative to the installation of the ports. They are retrieved from the URL specified in the `build.conf` file.
 - `isoimage.amd64` and `cloning.amd64.log` contain logs relative to the build of the ISO itself
+
+If you encounder an error after the kernel build, please check your HTTP server : Following the Kernel build, the URL URI `/packages/${product_name}_${pfSense_gui_branch}_amd64-core` (replace `product_name` and `pfSense_gui_branch` accordingly) should point to a folder with some content instead. If you are getting a 404 error instead, you may need to edit manually the symlink in  `/usr/local/www/nginx/packages/` (to make it point to `.real-***` instead of `.latest`)
 
 At the end of the build, a compressed iso file (`.iso.gz`) file will be present in `~pfsense/tmp/${product_name}/installer/`. You can extract it using `gzip -kd *.gz` if you need the plain `.iso`.
 
