@@ -19,7 +19,7 @@ You will then have to fork 3 repositories:
 You will also need to apply the follwing changes :
 
 ### FreeBSD Source
-- Checkout to the `RELENG_2_5` branch. 
+- Checkout to the `devel-12` branch. 
 - In the folder `/release/conf/`, rename `pfSense_src-env.conf`, `pfSense_src.conf` and `pfSense_make.conf` to `libreSense_src-env.conf`, `libreSense_src.conf` and `libreSense_make.conf`
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 
