@@ -238,8 +238,6 @@ The build can the monitored from the two files in the `logs/` directory of pfSen
 - `install_pkg_install_ports.txt` contain logs relative to the installation of the ports. They are retrieved from the URL specified in the `build.conf` file.
 - `isoimage.amd64` and `cloning.amd64.log` contain logs relative to the build of the ISO itself
 
-If you encounder an error after the kernel build, please check your HTTP server : Following the Kernel build, the URL URI `/packages/${product_name}_${pfSense_gui_branch}_amd64-core` (replace `product_name` and `pfSense_gui_branch` accordingly) should point to a folder with some content instead. If you are getting a 404 error instead, you may need to edit manually the symlink in  `/usr/local/www/nginx/packages/` (to make it point to `.real-***` instead of `.latest`)
-
 At the end of the build, a compressed iso file (`.iso.gz`) file will be present in `~pfsense/tmp/${product_name}/installer/`. You can extract it using `gzip -kd *.gz` if you need the plain `.iso`.
 
 ### If your encounter errors during ports or kernel build: possible root causes, and how to fix them:
