@@ -238,7 +238,7 @@ The build can the monitored from the two files in the `logs/` directory of pfSen
 - `install_pkg_install_ports.txt` contain logs relative to the installation of the ports. They are retrieved from the URL specified in the `build.conf` file.
 - `isoimage.amd64` and `cloning.amd64.log` contain logs relative to the build of the ISO itself
 
-At the end of the build, a compressed iso file (`.iso.gz`) file will be present in `~pfsense/tmp/${product_name}/installer/`. You can extract it using `gzip -kd *.gz` if you need the plain `.iso`.
+At the end of the build, a compressed iso file (`.iso.gz`) will be present in `~pfsense/tmp/${product_name}/installer/`. You can extract it using `gzip -kd *.gz` if you need the plain `.iso`.
 
 ### If your encounter errors during ports or kernel build: possible root causes, and how to fix them:
 
