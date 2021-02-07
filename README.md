@@ -259,7 +259,7 @@ I haven't noticed any *delayed open sourcing* myself, but If that ever happens, 
 
 Your ISO is built the same way as pfSense ISO distributed by Netgate, and does contain the same code, with one major difference: your ISO does not include GNID.
 
-GNID is a binary (located at `/usr/sbin/gnid`) that is managing Netgate license for pfSense. This binary basically generates a unique Netgate ID for each genuine pfSense. 
+GNID is a binary (located at `/usr/sbin/gnid`) which is managing Netgate license for pfSense. This binary basically generates a unique Netgate ID for each genuine pfSense. 
 
 The generated unique ID then become part of the default "User-Agent" when making HTTP requests with PHP (HTTP requests are used for fetching bogons, installing packages, displaying the first copyright message...etc). 
 
