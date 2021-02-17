@@ -19,7 +19,7 @@ You will then have to fork 3 repositories:
 You will also need to apply the follwing changes :
 
 ### FreeBSD Source
-- Checkout to the the branch you would like to build (`devel-12` for dev version, `RELENG_2_5` for stable version).
+- Checkout to the the branch you would like to build (`devel-12` for dev version, `RELENG_2_5_0` for stable version).
 - In the folder `/release/conf/`, rename `pfSense_src-env.conf`, `pfSense_src.conf` and `pfSense_make.conf` to `libreSense_src-env.conf`, `libreSense_src.conf` and `libreSense_make.conf`
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 
@@ -167,7 +167,7 @@ export PRODUCT_NAME="libreSense" # Replace with your product name
 export FREEBSD_REPO_BASE=https://github.com/{your username}/FreeBSD-src.git # Location of your FreeBSD sources repository
 export POUDRIERE_PORTS_GIT_URL=https://github.com/{your username}/FreeBSD-ports.git # Location your FreeBSD ports repository
 
-export FREEBSD_BRANCH=devel-12 # Branch of FreeBSD sources to build
+export FREEBSD_BRANCH=RELENG_2_5_0 # Branch of FreeBSD sources to build
 
 # The branch of FreeBSD ports to build is set automatically based on pfSense GUI branch.
 # If you would like to build a specific branch of FreeBSD ports, the variable to set is POUDRIERE_PORTS_GIT_BRANCH
