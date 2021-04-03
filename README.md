@@ -23,6 +23,10 @@ You will also need to apply the follwing changes :
 - In the folder `/release/conf/`, rename `pfSense_src-env.conf`, `pfSense_src.conf` and `pfSense_make.conf` to `libreSense_src-env.conf`, `libreSense_src.conf` and `libreSense_make.conf`
 - Rename the file `/sys/amd64/conf/pfSense` to `/sys/amd64/conf/libreSense`
 
+### FreeBSD Ports
+- Checkout to the the branch you would like to build (`devel` for dev version, `RELENG_2_5_0` for stable version).
+-  Edit the file `/security/pfSense/Makefile` : remove `wireguard-tools>=0:security/wireguard-tools` from the `RUN_DEPENDS` variable. (While [open source](https://github.com/pfsense/wireguard-tools), the wireguard-tools port for pfSense is currently not integrated into FreeBSD)
+
 ### pfSense GUI
 - Go to the folder `/tools/templates/pkg_repos/` in the branch you would like to build (`master`for dev version, `RELENG_2_5_0` for stable version) and change `pfSense` to `libreSense` in the file names (e.g., `pfSense-repo.abi => libreSense-repo.abi`)
 - Edit the file `/src/etc/inc/globals.inc` : replace the content of `product_name` by `libreSense`, and the content of `pkg_prefix` by `libreSense-pkg-`.
@@ -226,7 +230,7 @@ Few possible root causes:
    - In this case you can update the [`distinfo`](https://github.com/pfsense/FreeBSD-ports/blob/devel/print/texinfo/distinfo) of each concerned port in your GitHub fork of `FreeBSD ports`, then you can run `./build.sh --update-poudriere-ports` to refresh the files on your build server. 
    - Alternatively, you can find any old dist mirror (such as [this one](http://distfiles.icmpv6.org/distfiles/)), download the files on the build server in their matching folder (using `wget`/`curl`), then continue the build
 
-You need to build **ALL** ports before proceeding to the next step. If you don't want to build one port, you can exclude it by removing it in [poudriere_bulk](https://github.com/pfsense/pfsense/blob/master/tools/conf/pfPorts/poudriere_bulk). 
+You need to build **ALL** ports before proceeding to the next step. If you don't want to build one port, you can exclude it by removing it in [poudriere_bulk](https://github.com/pfsense/pfsense/blob/master/tools/conf/pfPorts/poudriere_bulk).
 
 
 ### Build kernel and create ISO
