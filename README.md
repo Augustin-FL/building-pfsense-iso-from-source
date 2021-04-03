@@ -95,6 +95,7 @@ dd if=/dev/zero of=/root/swap.bin bs=1M count=8192
 chmod 0600 /root/swap.bin
 mdconfig -a -t vnode -f /root/swap.bin -u 0 
 echo 'swapfile="/root/swap.bin"' >> /etc/rc.conf
+swapon /dev/md0
 ```
 
 
