@@ -32,6 +32,7 @@ You will also need to apply the follwing changes :
 - Edit the file `/src/etc/inc/globals.inc` : replace the content of `product_name` by `libreSense`, and the content of `pkg_prefix` by `libreSense-pkg-`.
 - In the folder `/src/usr/local/share/`, rename the folder `pfSense` to `libreSense`.
 - In the folder `/src/etc/`, rename the files `pfSense-ddb.conf` and `pfSense-devd.conf` to `libreSense-ddb.conf` and `libreSense-devd.conf`.
+- Edit the file `/tools/builder_defaults.sh` : remove `if_wg` from the `MODULES_OVERRIDE` variable. 
 
 ## A deeper look into Netgate build environment
 
