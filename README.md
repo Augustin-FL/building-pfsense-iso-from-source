@@ -91,7 +91,7 @@ pkg install -y htop screen wget mmv
 # Only install this if your FreeBSD is a virtual machine
 pkg install -y open-vm-tools
 
-# Create an 8G swap device (Not required but can be usefull if you don't have enough memory)
+# Create an 8G swap device (Not required but advised : will be useful if you don't have enough memory)
 dd if=/dev/zero of=/root/swap.bin bs=1M count=8192
 chmod 0600 /root/swap.bin
 mdconfig -a -t vnode -f /root/swap.bin -u 0 
