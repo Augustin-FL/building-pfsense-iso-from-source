@@ -138,22 +138,7 @@ openssl genrsa -out repo.key 2048
 chmod 0400 repo.key
 openssl rsa -in repo.key -out repo.pub -pubout
 printf "function: sha256\nfingerprint: `sha256 -q repo.pub`\n" > fingerprint
-```
-
-Then create a script file `sign.sh` in the `/root/sign/` folder.
-```
-#!/bin/sh
-read -t 2 sum
-[ -z "$sum" ] && exit 1
-echo SIGNATURE
-echo -n $sum | openssl dgst -sign /root/sign/repo.key -sha256 -binary
-echo
-echo CERT
-cat /root/sign/repo.pub
-echo END
-```
-Finally, ensure that this script is executable: 
-```
+curl -o /root/sign/sign.sh https://raw.githubusercontent.com/freebsd/pkg/master/scripts/sign.sh
 chmod +x /root/sign/sign.sh
 ```
 
