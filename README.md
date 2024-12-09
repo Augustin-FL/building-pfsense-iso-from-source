@@ -27,28 +27,23 @@ You will also need to apply the following changes:
 ### FreeBSD Ports
 - Checkout to the the branch you would like to build (`devel` for dev version, `RELENG_2_7_2` for stable version).
 - Edit the file `/sysutils/pfSense-upgrade/Makefile`: remove the line `RUN_DEPENDS+= pfSense-repoc>=0:sysutils/pfSense-repoc`.
-- Edit the file `/sysutils/pfSense-repo/Makefile` : change the line `MIRROR_TYPE?= srv` by `MIRROR_TYPE?= none`.
 - Edit the file `/security/pfSense/pkg-plist`:  Remove all lines starting with `%%DATADIR%%/keys`.
 - Edit the file `/security/pfSense/Makefile`:
   - Rename the variable `USE_GITLAB` to `USE_GITHUB`.
   - Rename the variable `GL_ACCOUNT` to `GH_ACCOUNT`. Also, change the variable content to your actual GitHub username.
   - Rename the variable `GL_COMMIT` to `GH_TAGNAME`.
-  - Change the line `GL_PROJECT= ${PFSENSE_SRC_REPO}` to `GH_PROJECT= pfsense`.
   - Remove the line `GL_SITE= https://gitlab.netgate.com`.
   - Remove the line `pfSense-gnid>=0:security/pfSense-gnid \` from the `RUN_DEPENDS` variable, if it exists.
 
 ### pfSense GUI
 - Checkout to the branch you would like to build (`master` for dev version, `RELENG_2_7_2` for stable version).
-- Go to the folder `/tools/templates/pkg_repos/` and rename the file `pfSense-repo.conf` to `libreSense-repo.conf` (if you are building a stable ISO) or `libreSense-repo-devel.conf` (if you are building a dev version).
+- Go to the folder `/tools/templates/pkg_repos/` and rename the file `pfSense-repo.conf` to `libreSense-repo.conf`
 - Edit the file `/src/etc/inc/globals.inc` : replace the content of `product_name` by `libreSense`, and the content of `pkg_prefix` by `libreSense-pkg-`.
 - In the folder `/src/usr/local/share/`, rename the folder `pfSense` to `libreSense`.
 - In the folder `/src/etc/`, rename the files `pfSense-ddb.conf` and `pfSense-devd.conf` to `libreSense-ddb.conf` and `libreSense-devd.conf`.
 - Edit the file `/tools/templates/core_pkg/base/pkg-plist`: Remove the line `share/%%PRODUCT_NAME%%/initial.txz` from the file.
-- Edit the file `/tools/builder_common.sh`: apply the [following patches](https://github.com/Augustin-FL/building-pfsense-iso-from-source/blob/master/patches/builder-common.sh.diff) to the file.
-- Edit the file `/tools/builder_defaults.sh`:
-  - Remove`drm2` and `ndis` from the variable `MODULES_OVERRIDE_amd64`.
-  - Change variable `PKG_REPO_BRANCH_RELEASE` to `v2_7_2`.
-  - If you are building a stable version, change variable `PFSENSE_DEFAULT_REPO` to `"${PRODUCT_NAME}-repo"`.
+- Edit the file `/tools/builder_common.sh` and `/tools/builder_defaults.sh`: apply the [following pull request](https://github.com/pfsense/pfsense/pull/4721) ([see how](https://www.andrewkroh.com/development/2018/01/17/testing-github-pull-requests-using-git-patches.html)).
+- Edit the file `/tools/builder_defaults.sh`: Remove`drm2` and `ndis` from the variable `MODULES_OVERRIDE_amd64`.
  
 ## A deeper look into Netgate build environment
 
@@ -99,6 +94,7 @@ pkg install -y git nginx poudriere-devel rsync sudo
 pkg install -y vmdktool curl qemu-user-static gtar xmlstarlet pkgconf openssl portsnap
 
 # Required for building iso
+mkdir -p /var/db/portsnap
 portsnap fetch extract
 
 # not required but advised for building/monitoring/debugging
@@ -154,7 +150,7 @@ cd /root/sign/
 openssl genrsa -out repo.key 2048
 chmod 0400 repo.key
 openssl rsa -in repo.key -out repo.pub -pubout
-printf "function: sha256\nfingerprint: `sha256 -q repo.pub`\n" > fingerprint
+printf "function: sha256\nfingerprint: \"$(sha256 -q repo.pub)\"\n" > fingerprint
 curl -o /root/sign/sign.sh https://raw.githubusercontent.com/freebsd/pkg/master/scripts/sign.sh
 sed -i "" 's+ repo\.+ /root/sign/repo\.+g' /root/sign/sign.sh
 chmod +x /root/sign/sign.sh
@@ -204,7 +200,12 @@ export PKG_REPO_SERVER_RELEASE="http://${myIPAddress}/packages"
 export PKG_REPO_SERVER_STAGING="http://${myIPAddress}/packages" # We need to also specify this variable, because even
 # if we don't build staging release some ports configuration is made for staging
 
-export SRCCONF="/root/pfsense/tmp/FreeBSD-src/release/conf/${PRODUCT_NAME}_build_src.conf"
+
+# pkg repository type. Keep this to none unless you want to set SRV records for your PKG server
+export MIRROR_TYPE="none"
+
+# Lowercase name of your repository on git
+export POUDRIERE_PFSENSE_SRC_REPO=$(git config --get remote.origin.url|sed 's/.*\/\(.*\)\.git/\1/g'|tr '[:upper:]' '[:lower:]')
 ``` 
 
 # Building the ISO
